@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 require("./src/routes/tutorial.route")(app);
+require("./src/routes/weather.route")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 9000;
