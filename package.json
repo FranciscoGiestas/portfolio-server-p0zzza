@@ -1,6 +1,6 @@
 {
   "name": "server-augusto",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "main": "server.js",
   "author": "Francisco Giestas",
   "license": "MIT",
