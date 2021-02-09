@@ -1,4 +1,4 @@
-async function express (app) {
+async function express(app) {
     await require("./express.loader")(app);
 }
 
@@ -8,8 +8,14 @@ async function sequelize() {
 }
 
 async function load(app) {
-    express(app).then(() => console.log('-> Express loaded'));
-    sequelize().then(() => console.log('-> Sequelize loaded'));
+    await express(app)
+     .then( () => {
+        console.log('-> Express loaded')
+        return sequelize()
+     })
+     .then( () => {
+        console.log('-> Sequelize loaded')
+     })
 }
 
 module.exports = {load};

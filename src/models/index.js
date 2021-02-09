@@ -1,4 +1,4 @@
-module.exports = db => {
+module.exports = (db) => {
     const sequelize = db.sequelize;
     const Sequelize = db.Sequelize;
 
