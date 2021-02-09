@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const config = require("../config");
 const routes = require("../api/routes");
 
-module.exports = function(app) {
+module.exports = app => {
     app.use(morgan("dev"));
 
     app.get('/status', (req, res) => {

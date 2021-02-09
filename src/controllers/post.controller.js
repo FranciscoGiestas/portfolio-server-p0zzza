@@ -1,6 +1,5 @@
 const db = require("../models/index");
 const Post = db.posts;
-const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -34,6 +33,9 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
+  res.send(`Procurar todos os utilizadores`);
+
+  /*
     const title = req.query.title;
     var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
   
@@ -47,11 +49,12 @@ exports.findAll = (req, res) => {
             err.message || "Some error occurred while retrieving tutorials."
         });
       });
+      */
   };
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
-  
+  res.send(`Procurar utilizador id = ${req.params.id}`);
 };
 
 // Update a Tutorial by the id in the request

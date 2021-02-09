@@ -1,5 +1,7 @@
-const router = require("express").Router()
+const router = require("express").Router();
 
-//router.get('/api-status', require('./util'));
+//Define our routers here
+router.use('/post', require("./post.route"));
+router.use('/weather', require("./weather.route"));
 
 module.exports = router;

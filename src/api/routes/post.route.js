@@ -1,21 +1,17 @@
-module.exports = app => {
-    const posts = require("../../controllers/post.controller.js");
-  
-    var router = require("express").Router();
+const posts = require("../../controllers/post.controller.js");
 
-    router.post("/", posts.create);
+const router = require("express").Router();
 
-    router.get("/", posts.findAll);
+router.post("/", posts.create);
 
-    router.get("/published", posts.findAllPublished);
+router.get("/", posts.findAll);
 
-    router.get("/:id", posts.findOne);
+router.get("/:id", posts.findOne);
 
-    router.put("/:id", posts.update);
+router.put("/:id", posts.update);
 
-    router.delete("/:id", posts.delete);
+router.delete("/:id", posts.delete);
 
-    router.delete("/", posts.deleteAll);
-  
-    app.use('/api/post', router);
-  };
+router.delete("/", posts.deleteAll);
+
+module.exports = router;
