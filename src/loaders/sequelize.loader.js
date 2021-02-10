@@ -1,34 +1,46 @@
-const Sequelize = require("sequelize");
+'use strict';
+
+const { Sequelize } = require("sequelize");
 
 const config = require("../config");
 
-const sequelize = new Sequelize(config.db.db, config.db.user, config.db.password, {
-    host: config.db.host,
-    dialect: config.db.dialect,
-    pool: {
-        max: config.db.pool.max,
-        min: config.db.pool.min,
-        acquire: config.db.pool.acquire,
-        idle: config.db.pool.idle
-    },
-    logging: false
-})
-
-async function connect() {
-    try {
-        await sequelize.authenticate();
-        //console.log('Connected to database successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-        process.exit(1);
-    }
-}
+const fs = require('fs');
+const path = require('path');
+const basename = path.basename(__filename);
 
 const db = {};
 
-db.Sequelize = Sequelize;
+let sequelize;
+
+sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
+    host: config.development.host,
+    dialect: config.development.dialect,
+    pool: {
+        max: config.development.pool.max,
+        min: config.development.pool.min,
+        acquire: config.development.pool.acquire,
+        idle: config.development.pool.idle
+    },
+    logging: false
+});
+
+fs
+.readdirSync(__dirname + "/../models")
+.filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+})
+.forEach(file => {
+    const model = require(path.join('../models/', file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+});
+
+Object.keys(db).forEach(modelName => {
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
+});
+
 db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-require("../models")(db);
-
-module.exports = {db, connect};
+module.exports = db;

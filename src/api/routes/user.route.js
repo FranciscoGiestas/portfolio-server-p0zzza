@@ -1,8 +1,9 @@
-const posts = require("../../controllers/post.controller.js");
+const user_controller = require("../../controllers/user.controller.js");
 
 const router = require("express").Router();
 
-router.post("/", posts.create);
+router.get("/", user_controller.findAll);
+router.post("/", user_controller.create);
 
 /*
 router.get("/", posts.findAll);

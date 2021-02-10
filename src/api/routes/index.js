@@ -4,7 +4,7 @@ const router = require("express").Router();
 router.get('/', (req, res) => {
     res.send("Nothing to do here :)");
 });
-router.use('/post', require("./post.route"));
+router.use('/user', require("./user.route"));
 router.use('/weather', require("./weather.route"));
 
 module.exports = router;

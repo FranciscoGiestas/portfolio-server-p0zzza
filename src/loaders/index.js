@@ -1,10 +1,9 @@
 async function express(app) {
-    await require("./express.loader")(app);
+    await require("./express.loader").load(app);
 }
 
 async function sequelize() {
-    const sequelize = require("./sequelize.loader");
-    await sequelize.connect();
+    require("./sequelize.loader");
 }
 
 async function load(app) {

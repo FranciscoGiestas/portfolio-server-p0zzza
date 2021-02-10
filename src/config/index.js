@@ -6,21 +6,21 @@ if (envFound.error) {
 }
 
 module.exports = {
-  port: parseInt(process.env.PORT, 10),
-  api: {
+  "port": parseInt(process.env.PORT, 10),
+  "api": {
     prefix: '/api',
   },
-  db: {
+  "development": {
     host: process.env.DB_HOST,
-    user: process.env.DB_USER,
+    username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    db: process.env.DB,
-    dialect: "postgres",
+    database: process.env.DB,
+    dialect: process.env.DIALECT,
     pool: {
         max: 5,
         min: 0,
         acquire: 30000,
         idle: 10000
         }
-    }
+    },
 };
